@@ -2,6 +2,7 @@ package com.consistent.main.mapping;
 
 import java.io.IOException;
 import java.io.StringWriter;
+import java.util.HashSet;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamException;
@@ -14,11 +15,9 @@ public class MarcaMapping implements Mapping{
 	private String name;
 	private String title;
 	private String language;
-	private RateMapping rateMapping;
+	private HashSet<RateMapping> rateMapping;
 	
-	
-	
-	public MarcaMapping(String guid, String code, String name, String title, String language, RateMapping rateMapping) {
+	public MarcaMapping(String guid, String code, String name, String title, String language, HashSet<RateMapping> rateMapping) {
 		super();
 		this.guid = guid;
 		this.code = code;
@@ -34,7 +33,7 @@ public class MarcaMapping implements Mapping{
 		this.name = "";
 		this.title = "";
 		this.language = "";
-		this.rateMapping = new RateMapping();
+		this.rateMapping = new HashSet<RateMapping>();
 	}
 
 
@@ -108,14 +107,14 @@ public class MarcaMapping implements Mapping{
 
 
 
-	public RateMapping getRateMapping() {
+	public HashSet<RateMapping> getRateMapping() {
 		return rateMapping;
 	}
 
 
 
 
-	public void setRateMapping(RateMapping rateMapping) {
+	public void setRateMapping(HashSet<RateMapping> rateMapping) {
 		this.rateMapping = rateMapping;
 	}
 
@@ -158,10 +157,12 @@ public class MarcaMapping implements Mapping{
 							xMLStreamWriter.writeCharacters(channel);
 						xMLStreamWriter.writeEndElement();
 						xMLStreamWriter.writeStartElement("rates");
-							xMLStreamWriter.writeCharacters(rateMapping.getMapping());
+							for (RateMapping rateMappingss : rateMapping) {
+								xMLStreamWriter.writeCharacters(rateMappingss.getMapping());
+							}
 						xMLStreamWriter.writeEndElement();
-					xMLStreamWriter.writeEndDocument();
-				xMLStreamWriter.writeEndDocument();
+					xMLStreamWriter.writeEndElement();
+				xMLStreamWriter.writeEndElement();
 			xMLStreamWriter.writeEndDocument();
 		xMLStreamWriter.flush();
 		xMLStreamWriter.close();

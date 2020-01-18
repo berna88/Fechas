@@ -295,10 +295,10 @@ public class RateMapping implements Mapping{
 					xMLStreamWriter.writeEndElement();
 				xMLStreamWriter.writeEndElement();
 			xMLStreamWriter.writeEndElement();
-		//xMLStreamWriter.flush();
-		//xMLStreamWriter.close();
+		xMLStreamWriter.flush();
+		xMLStreamWriter.close();
 		String result = stringWriter.getBuffer().toString();
-		//stringWriter.close(); 
+		stringWriter.close(); 
 		return result;
 	}
 
